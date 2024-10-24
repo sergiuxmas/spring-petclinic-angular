@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+  petclinicRest:
+    image: petclinic-rest:v1
+    ports:
+      - "9966:9966"
+    networks:
+      - petclinic
+
+  petclinicWeb:
+    image: petclinic-web:v1
+    depends_on:
+      - petclinicRest
+    ports:
+      - "4200:80"
+    networks:
+      - petclinic
+
+networks:
+  petclinic:
