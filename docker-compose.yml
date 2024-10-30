@@ -6,6 +6,9 @@ services:
       - postgres
     ports:
       - "9966:9966"
+    environment:
+      - spring.profiles.active=postgres,spring-data-jpa
+      - POSTGRES_URL=jdbc:postgresql://postgres:5432/petclinic
     networks:
       - petclinic
 
@@ -26,7 +29,15 @@ services:
       - POSTGRES_PASSWORD=petclinic
       - POSTGRES_USER=petclinic
       - POSTGRES_DB=petclinic
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+#      - ./postgres-data:/var/lib/postgresql/data
     networks:
       - petclinic
+
 networks:
   petclinic:
+
+volumes:
+  postgres-data:
+
