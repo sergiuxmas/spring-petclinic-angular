@@ -47,8 +47,8 @@ services:
       bash -c "chown -R postgres:postgres /var/lib/postgresql/data &&
                docker-entrypoint.sh postgres"
     healthcheck:
-#      test: "pg_isready -U petclinic -d petclinic | grep 'accepting connections'"
-      test: [ "CMD-SHELL", "pg_isready" ]
+      test: "pg_isready"
+#      test: [ "CMD-SHELL", "pg_isready" ]
       interval: 10s
       timeout: 10s
       retries: 3
