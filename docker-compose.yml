@@ -30,7 +30,7 @@ services:
 
   postgres:
     image: postgres:16.3
-#    restart: always
+    restart: always
     ports:
       - "5432:5432"
 #    expose:
@@ -39,18 +39,19 @@ services:
       - POSTGRES_PASSWORD=petclinic
       - POSTGRES_USER=petclinic
       - POSTGRES_DB=petclinic
-#    volumes:
-#      - postgres-data:/var/lib/postgresql/data
-#      - ./postgres-data:/var/lib/postgresql/data
-#    user: "postgres"
-#    command: >
-#      bash -c "chown -R postgres:postgres /var/lib/postgresql/data &&
-#               docker-entrypoint.sh postgres"
-#    healthcheck:
-#      test: "pg_isready -U petclinic -d petclinic | grep 'accepting connections'"
-#      interval: 10s
-#      timeout: 10s
-#      retries: 3
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql/data
+    user: "postgres"
+    command: >
+      bash -c "chown -R postgres:postgres /var/lib/postgresql/data &&
+               docker-entrypoint.sh postgres"
+    healthcheck:
+      test: "pg_isready -U petclinic -d petclinic | grep 'accepting connections'"
+      interval: 10s
+      timeout: 10s
+      retries: 3
     networks:
       - petclinic
 
