@@ -58,6 +58,6 @@ services:
 networks:
   petclinic:
 
-#volumes:
-#  postgres-data:
+volumes:
+  postgres-data:
 
