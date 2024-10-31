@@ -3,7 +3,8 @@ services:
   petclinicRest:
     image: petclinic-rest:v1
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     ports:
       - "9966:9966"
     environment:
@@ -39,11 +40,11 @@ services:
       - postgres-data:/var/lib/postgresql/data
 #      - ./postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: "[\"CMD\", \"pg_isready -U petclinic -d petclinic\"]"
+      test: "pg_isready -U petclinic -d petclinic | grep 'accepting connections' || exit 1"
       interval: 10s
       timeout: 10s
-      retries: 5
-      start_period: 20s
+      retries: 3
+      start_period: 10s
     networks:
       - petclinic
 
