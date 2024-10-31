@@ -30,7 +30,7 @@ services:
 
   postgres:
     image: postgres:16.3
-    restart: always
+#    restart: always
     ports:
       - "5432:5432"
 #    expose:
@@ -57,6 +57,6 @@ services:
 networks:
   petclinic:
 
-volumes:
-  postgres-data:
+#volumes:
+#  postgres-data:
 
