@@ -39,10 +39,11 @@ services:
       - POSTGRES_PASSWORD=petclinic
       - POSTGRES_USER=petclinic
       - POSTGRES_DB=petclinic
-      - POSTGRES_HOST_AUTH_METHOD=trust
+#      - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ./postgres-data:/var/lib/postgresql/data
+#      - ./postgres-data:/var/lib/postgresql/data
+#    command: ["/bin/sh", "-c", "chmod +x /usr/src/app/docker-entrypoint.sh && su postgres -c 'pg_ctl -D /var/lib/postgresql/data -l logfile start'"]
 #    user: "postgres"
 #    command: >
 #      bash -c "chown -R postgres:postgres /var/lib/postgresql/data &&
